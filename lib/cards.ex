@@ -87,4 +87,21 @@ defmodule Cards do
     end
   end
 
+  # automating create_deck -> shuffle -> deal
+  @doc """
+    Pipe Operator |>
+    It passes the result of each method as the first argument of the next function
+  """
+  def create_hand(hand_size) do
+    # without piping
+#    deck = Cards.create_deck
+#    deck = Cards.shuffle(deck)
+#    hand = Cards.deal(deck, hand_size)
+
+    # with piping
+    Cards.create_deck
+    |> Cards.shuffle
+    |> Cards.deal(hand_size)
+  end
+
 end

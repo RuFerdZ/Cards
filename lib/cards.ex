@@ -64,4 +64,27 @@ defmodule Cards do
     Enum.split(deck, hand_size) # returns a tuple of lists with 2 lists in a split -> {[],[]}
   end
 
+  # save the deck to a file
+  def save(deck, filename) when is_list(deck) do
+    binary = :erlang.term_to_binary(deck)
+    File.write(filename, binary)
+  end
+
+  # load the data from a file
+  def load(filename) do
+#    {status, binary} = File.read(filename)
+#
+#    # check if the file is loaded properly
+#    case status do
+#      :ok -> :erlang.binary_to_term(binary)
+#      :error -> "The file does not exist!"
+#    end
+
+    # above using pattern matching
+    case File.read(filename) do
+      {:ok, binary} -> :erlang.binary_to_term(binary)
+      {:error, _reason} -> "The file does not exist!"  # we use _ since we wont use that variable and wont produce unused variable warning
+    end
+  end
+
 end
